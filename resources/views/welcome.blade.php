@@ -1,273 +1,227 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DevMentors</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Montserrat", sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevMentors - Transformando o futuro uma geração por vez</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="{!! asset('logo.svg')!!}" type="image/x-icon">
 
-    body {
-      color: #1f2d3d;
-      background: #fff;
-      line-height: 1.6;
-    }
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-dark: #1d4ed8;
+            --accent-purple: #8b5cf6;
+            --neutral-50: #f8fafc;
+            --neutral-100: #f1f5f9;
+            --neutral-600: #475569;
+            --neutral-700: #334155;
+            --neutral-900: #0f172a;
+        }
 
-    header {
-      width: 100%;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      padding: 15px 8%;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    header nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: 500;
-      color: #1f2d3d;
-      transition: 0.3s;
-    }
-    header nav a:hover {
-      color: #007bff;
-    }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--neutral-50);
+            color: var(--neutral-700);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-    header .btn-login {
-      padding: 8px 20px;
-      border-radius: 25px;
-      background: #007bff;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-    }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
 
-    section {
-      padding: 80px 8%;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            gap: 20px
+        }
 
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #007bff, #00c6ff);
-      color: #fff;
-      padding-top: 120px;
-    }
+        .logo img {
+            width: 75px
+        }
 
-    .hero-text {
-      max-width: 50%;
-    }
-    .hero-text h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-    .hero-text p {
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-    }
-    .hero-text .btn-primary {
-      background: #fff;
-      color: #007bff;
-      padding: 12px 30px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-    }
+        .nav-buttons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card h3 {
-      margin-bottom: 15px;
-      color: #007bff;
-    }
+        .btn {
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+        }
 
-    .section-title {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 50px;
-      font-weight: 700;
-    }
+        .btn-entrar {
+            background: none;
+            color: var(--neutral-700);
+            font-weight: 500;
+        }
 
-    .faq-item {
-      margin-bottom: 15px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    .faq-item button {
-      width: 100%;
-      background: #f7f9fc;
-      border: none;
-      outline: none;
-      padding: 15px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-align: left;
-      cursor: pointer;
-    }
-    .faq-item .answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-      background: #fff;
-      padding: 0 15px;
-    }
-    .faq-item.active .answer {
-      max-height: 200px;
-      padding: 15px;
-    }
+        .btn-entrar:hover {
+            background: var(--neutral-100);
+            color: var(--primary-blue);
+        }
 
-    footer {
-      background: #1f2d3d;
-      color: #fff;
-      padding: 40px 8%;
-      text-align: center;
-    }
+        .btn-hackathon {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
 
-    @media (max-width: 900px) {
-      .hero {
-        flex-direction: column;
-        text-align: center;
-      }
-      .hero-text {
-        max-width: 100%;
-      }
-    }
-  </style>
+        .btn-hackathon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 2rem;
+            background: linear-gradient(135deg, var(--neutral-50) 0%, #e0e7ff 50%, var(--neutral-50) 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--neutral-900);
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--neutral-600);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+            padding: 1.25rem 3rem;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.4);
+        }
+
+        .footer {
+            background: var(--neutral-900);
+            color: white;
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            opacity: 0.8;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 1rem 1.5rem; }
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.125rem; }
+        }
+    </style>
 </head>
 <body>
+    <header class="header">
+        <div class="logo">
+            <img src="{!! asset('logo.svg')!!}" alt="">
+            DevMentors
+        </div>
+        <nav class="nav-buttons">
+            <a href="{{ route('mentores.dashboard') }}" class="btn btn-entrar">Entrar</a>
+            <button class="btn btn-hackathon">Hackathon</button>
+        </nav>
+    </header>
 
-  <header>
-    <div class="logo"><h2>DevMentors</h2></div>
-    <nav>
-      <a href="#trilhas">Trilhas</a>
-      <a href="#mentores">Mentores</a>
-      <a href="#planos">Planos</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <a href="login" class="btn-login">Login</a>
-  </header>
+    <main class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                DevMentors, <span class="highlight">transformando</span> o <span class="highlight">futuro</span><br>
+                uma <span class="highlight">geração</span> por vez.
+            </h1>
 
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Aprenda com quem já está no mercado</h1>
-      <p>Mentorias práticas em PHP, JavaScript e Banco de Dados para acelerar sua carreira de desenvolvedor.</p>
-      <a href="#trilhas" class="btn-primary">Começar agora</a>
-    </div>
-    <div class="hero-img">
-      <img src="https://via.placeholder.com/400x300" alt="Ilustração">
-    </div>
-  </section>
+            <p class="hero-subtitle">
+                Vá além do código! Junte-se a nós e aprenda gratuitamente sobre programação, hard e
+                soft skills, e empreendedorismo com o apoio de mentores que entendem sua jornada.
+            </p>
 
-  <section id="trilhas">
-    <h2 class="section-title">Nossas Trilhas</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>PHP</h3>
-        <p>Aprenda do básico ao avançado com projetos reais.</p>
-      </div>
-      <div class="card">
-        <h3>JavaScript</h3>
-        <p>Domine o front-end e back-end com JS moderno.</p>
-      </div>
-      <div class="card">
-        <h3>Banco de Dados</h3>
-        <p>Entenda SQL e NoSQL para aplicações robustas.</p>
-      </div>
-    </div>
-  </section>
+            <button class="btn cta-button">
+                Quero Aprender
+            </button>
+        </div>
+    </main>
 
-  <section id="mentores">
-    <h2 class="section-title">Mentores</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>João Silva</h3>
-        <p>Desenvolvedor PHP com 10 anos de experiência.</p>
-      </div>
-      <div class="card">
-        <h3>Maria Souza</h3>
-        <p>Especialista em JavaScript e aplicações modernas.</p>
-      </div>
-      <div class="card">
-        <h3>Carlos Pereira</h3>
-        <p>DBA e engenheiro de dados apaixonado por ensinar.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="planos">
-    <h2 class="section-title">Planos</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Básico</h3>
-        <p>Acesso a uma trilha de aprendizado.</p>
-      </div>
-      <div class="card">
-        <h3>Intermediário</h3>
-        <p>Acesso a todas as trilhas + suporte via chat.</p>
-      </div>
-      <div class="card">
-        <h3>Premium</h3>
-        <p>Todas as trilhas + mentor exclusivo e projetos guiados.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq">
-    <h2 class="section-title">FAQ</h2>
-    <div class="faq-item">
-      <button>Como funciona a mentoria?</button>
-      <div class="answer"><p>A mentoria funciona de forma online, com encontros semanais e suporte assíncrono.</p></div>
-    </div>
-    <div class="faq-item">
-      <button>Posso cancelar quando quiser?</button>
-      <div class="answer"><p>Sim, o cancelamento pode ser feito a qualquer momento sem multas.</p></div>
-    </div>
-    <div class="faq-item">
-      <button>Recebo certificado?</button>
-      <div class="answer"><p>Sim, após completar cada trilha você recebe um certificado válido.</p></div>
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 DevMentors - Todos os direitos reservados.</p>
-  </footer>
-
-  <script>
-    const faqItems = document.querySelectorAll('.faq-item button');
-    faqItems.forEach(btn => {
-      btn.addEventListener('click', () => {
-        btn.parentElement.classList.toggle('active');
-      });
-    });
-  </script>
+    <footer class="footer">
+        <div class="footer-logo">DevMentors</div>
+        <p>Transformando o futuro através da educação e mentoria em tecnologia.</p>
+        <p style="margin-top: 2rem; opacity: 0.6;">&copy; 2025 DevMentors. Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
