@@ -10,22 +10,14 @@ use Illuminate\Support\Facades\Hash;
 class AlunoController extends Controller
 {
 
-    public function index()
-    {
-        $alunos = Aluno::latest()->paginate(10);
-
-        return view('dashboard', compact('alunos'));
-
-    }
-
-    public function getAlunoAsJson(Aluno $aluno)
+    public function index(Aluno $aluno)
     {
         return response()->json($aluno);
     }
 
     public function create()
     {
-        return view('alunos.create');
+
     }
 
     public function store(Request $request)
@@ -51,12 +43,12 @@ class AlunoController extends Controller
 
     public function show(Aluno $aluno)
     {
-        return view('alunos.show', compact('aluno'));
+
     }
 
     public function edit(Aluno $aluno)
     {
-        return view('alunos.edit', compact('aluno'));
+
     }
 
     public function update(Request $request, Aluno $aluno)

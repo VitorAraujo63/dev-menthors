@@ -10,7 +10,8 @@ class Mentores extends Model
         'nome',
         'email',
         'password',
-        'funcao'
+        'funcao',
+        'status'
     ];
 
 
